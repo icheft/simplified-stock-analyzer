@@ -1,6 +1,3 @@
-# To add a new cell, type '# %%'
-# To add a new markdown cell, type '# %% [markdown]'
-# %%
 import streamlit as st
 import pandas as pd
 import yfinance as yf
@@ -26,7 +23,6 @@ def _max_width_():
 
 
 def stock_analyzer(stock_id, capital, start_date, end_date, compare=False):
-    # %%
     if compare == True:
         stock_0050 = yf.Ticker('0050.TW')
         stock_df_0050 = stock_0050.history(
@@ -38,8 +34,6 @@ def stock_analyzer(stock_id, capital, start_date, end_date, compare=False):
         year_diff_0050 = relativedelta(end_0050, start_0050).years + \
             (relativedelta(end_0050, start_0050).months)/12
 
-        # %%
-
         init_balance_0050 = balance_0050 = capital
         total_balance_0050 = stock_monthly_returns_0050.copy()
         total_balance_0050[0] = 0
@@ -47,12 +41,11 @@ def stock_analyzer(stock_id, capital, start_date, end_date, compare=False):
         for i in range(len(stock_monthly_returns_0050)):
             balance_0050 = balance_0050 * (1+total_balance_0050[i])
             total_balance_0050[i] = balance_0050
-        # 合併兩個  series,同時改名. returns 改成 %
+
         monthly_returns_0050 = stock_monthly_returns_0050 * 100
         growth_0050 = pd.concat([monthly_returns_0050.rename("Return (%)"),
                                  total_balance_0050.rename("Balance")], axis=1)
 
-        # growth = growth.dropna()
         returnRate_0050 = (
             total_balance_0050[-1] - total_balance_0050[0])/total_balance_0050[0]
         cgar_0050 = (((1+returnRate_0050)**(1/year_diff_0050))-1)
@@ -68,15 +61,12 @@ def stock_analyzer(stock_id, capital, start_date, end_date, compare=False):
         end = end_date
     stock_df = stock_obj.history(start=start, end=end, auto_adjust=False)
 
-    # %%
     stock_monthly_returns = stock_df['Adj Close'].resample(
         'M').ffill().pct_change()
     start = stock_monthly_returns.index[0]
     end = stock_df.index[-1]  # 以 stock 的最後一天為結束日期.
     year_diff = relativedelta(end, start).years + \
         (relativedelta(end, start).months)/12
-
-    # %%
 
     init_balance = balance = capital
     total_balance = stock_monthly_returns.copy()
@@ -85,12 +75,11 @@ def stock_analyzer(stock_id, capital, start_date, end_date, compare=False):
     for i in range(len(stock_monthly_returns)):
         balance = balance * (1+total_balance[i])
         total_balance[i] = balance
-    # 合併兩個  series,同時改名. returns 改成 %
+
     monthly_returns = stock_monthly_returns * 100
     growth = pd.concat([monthly_returns.rename("Return (%)"),
                         total_balance.rename("Balance")], axis=1)
 
-    # growth = growth.dropna()
     returnRate = (total_balance[-1] - total_balance[0])/total_balance[0]
     cgar = (((1+returnRate)**(1/year_diff))-1)
     stats = ["", ""]
@@ -110,7 +99,11 @@ _開始日期_為 {}，_結束日期_為 {}\n，一共投資了 {:.2f} 年\n。�
     return stock_df, growth, stats
 
 
-st.set_page_config(layout="wide")
+MAGE_EMOJI_URL = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/mage_1f9d9.png"
+# Set page title and favicon.
+st.set_page_config(
+    page_title="Simplified Stock Analyzer", page_icon=MAGE_EMOJI_URL, layout="wide"
+)
 
 row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.beta_columns(
     (.1, 2, .2, 1, .1))
@@ -166,7 +159,6 @@ with line1_1:
             "Looks like you did not want to invest in any money. Steal (Earn) some first before you start the analysis.")
         st.stop()
     target = yf.Ticker(stock_id)
-    # st.write(target.info)
     stock_name = target.info['longName']
     st.header(f'分析 **{stock_name}**')
 
@@ -201,7 +193,7 @@ with row4_1:
         fig.update_layout(
             margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='x')
 
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 with row4_2:
     st.subheader('股票成交量變化')
@@ -221,7 +213,7 @@ with row4_2:
         fig.update_layout(
             margin={'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='x')
 
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 st.write('')
 row5_space1, row5_1, row5_space3 = st.beta_columns(
