@@ -250,4 +250,8 @@ with row5_1:
         st.plotly_chart(fig, use_container_width=True)
         st.markdown(stats[1])
 
-# %%
+row6_spacer1, row6_1, row6_spacer2 = st.beta_columns((.1, 3.2, .1))
+with row6_1:
+    st.markdown('***')
+    st.markdown(
+        "謝謝您瀏覽此小工具。此僅作為一個股票分析的簡單 Web App，如果您喜歡或願意一起開發更複雜的股票分析工具，請您聯繫我！")
