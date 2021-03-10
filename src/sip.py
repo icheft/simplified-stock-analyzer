@@ -33,7 +33,7 @@ def compare_methods(stock_df, start, end, installment, offset=6):
     for i in range(1, len(purchased_agg)):
         purchased_agg[i] += purchased_agg[i - 1]
     sip_balance, sip_growth, sip_stats = stock_sip(
-        stock_df, installment, investment_dates, lumpsum_amount, total_units_purchased)
+        stock_df, installment, investment_dates, lumpsum_amount, total_units_purchased, offset)
     lumpsum_balance, lumpsum_growth, lumpsum_stats = stock_lumpsum(
         stock_df, lumpsum_amount, investment_dates, lumpsum_amount /
         stock_df['Open'][0])
