@@ -32,12 +32,5 @@ def main():
         sip.main()
 
 
-@st.cache()
-def get_file_content_as_string(path):
-    url = 'https://raw.githubusercontent.com/streamlit/demo-self-driving/master/' + path
-    response = urllib.request.urlopen(url)
-    return response.read().decode("utf-8")
-
-
 if __name__ == '__main__':
     main()
