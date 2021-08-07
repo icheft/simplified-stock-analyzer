@@ -2,7 +2,7 @@ import streamlit as st
 from src import single_stock, sip
 import io
 
-MAGE_EMOJI_URL = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/twitter/259/mage_1f9d9.png"
+MAGE_EMOJI_URL = "https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/twitter/282/chart-increasing_1f4c8.png"
 # Set page title and favicon.
 st.set_page_config(
     page_title="Simplified Stock Analyzer", page_icon=MAGE_EMOJI_URL, layout="wide"
