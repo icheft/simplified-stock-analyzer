@@ -12,11 +12,12 @@ st.set_page_config(
 def main():
     # Render the readme as markdown using st.markdown.
     readme_file = io.open("README.md", mode="r", encoding="utf-8")
+    dev_file = io.open("docs/development.md", mode="r", encoding="utf-8")
     readme_text = st.markdown(readme_file.read())
 
     # Once we have the dependencies, add a selector for the app mode on the sidebar.
     st.sidebar.title("想怎麼查詢呢？")
-    selector = ["說明", "單一投資標的查詢", "定期定額查詢"]
+    selector = ["首頁", "單一投資標的查詢", "定期定額查詢", "本地開發說明"]
     app_mode = st.sidebar.selectbox("選擇分析模式",
                                     selector)
 
@@ -30,6 +31,10 @@ def main():
         readme_text.empty()
         st.sidebar.info('股數不為整數。數值僅作為參考。')
         sip.main()
+    elif app_mode == selector[3]:
+        readme_text.empty()
+        readme_text = st.markdown(dev_file.read())
+        st.sidebar.info('本地開發 / Local Development')
 
 
 if __name__ == '__main__':

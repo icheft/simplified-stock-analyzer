@@ -23,6 +23,11 @@
 ## 站點連結
 
 + [集保戶股權分散表](https://www.tdcc.com.tw/portal/zh/smWeb/qryStock) 或 ([這個](https://www.tdcc.com.tw/smWeb/QryStockAjax.do))
-+ [Emojipedia](https://emojipedia.org/)
+
+## 開發
+
+請見[簡易股票工具 - 本地開發](docs/development.md)文件。
+
+---
 
 如果對此專案有興趣的朋友，也歡迎與我一起讓這個工具變得更好 💪🏾
