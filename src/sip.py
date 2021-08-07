@@ -218,8 +218,8 @@ def main():
         st.subheader('股票持有股數變化')
 
         if compare_flag == False:
-            fig = px.line(purchased_agg[investment_dates[0]:], labels={
-                'Date': 'Date', 'value': 'Volume'})
+            fig = px.line(purchased_agg, labels={
+                'Date': 'Date', 'value': 'Volume'}, hover_data={'variable': False})
             fig.update_layout(showlegend=False, margin={
                 'l': 40, 'b': 40, 't': 10, 'r': 0}, hovermode='closest')
         else:
