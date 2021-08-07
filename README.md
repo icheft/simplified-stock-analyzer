@@ -20,4 +20,8 @@
 + [ ] Portfolio Analysis
 + [ ] Return Tables
 
+## 站點連結
+
++ [集保戶股權分散表](https://www.tdcc.com.tw/portal/zh/smWeb/qryStock) 或 ([這個](https://www.tdcc.com.tw/smWeb/QryStockAjax.do))
+
 如果對此專案有興趣的朋友，也歡迎與我一起讓這個工具變得更好 💪🏾
