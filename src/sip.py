@@ -56,27 +56,34 @@ def stock_sip(stock_df, installment, investment_dates, lumpsum_amount, total_uni
     j = 0  # for investment_dates
     j_investment_dates = investment_dates - investment_dates[0]
     cost_df = pd.DataFrame()
+    last_time = False
     for i in range(len(stock_daily_returns)):
-        balance = balance * (1+total_balance[i])
+        balance = balance * (1 + total_balance[i])
         if i == j_investment_dates[j] and i != 0:
+            print(j_investment_dates[j], j)
             j += 1
-            if (j >= len(j_investment_dates)):
+            if (j >= len(j_investment_dates)) and last_time != True:
                 j = len(j_investment_dates) - 1
-            else:
-                balance += installment
+                last_time = True
+
+            balance += installment
         elif i == 0:
             j += 1
-        cost_df = cost_df.append(
-            {'Cost': (j) * installment}, ignore_index=True)
-        total_balance[i] = balance
 
+        if last_time:
+            cost_df = cost_df.append(
+                {'Cost': (j + 1) * installment}, ignore_index=True)
+        else:
+            cost_df = cost_df.append(
+                {'Cost': (j) * installment}, ignore_index=True)
+
+        total_balance[i] = balance
     cost_df.index = stock_daily_returns.index
     cost = cost_df.Cost
     daily_returns = stock_daily_returns * 100
 
     growth = pd.concat([daily_returns.rename("Return (%)"),
                         total_balance.rename("Balance"), cost.rename('Cost')], axis=1)
-    # print(len(investment_dates) * installment)
     returnRate = (total_balance[-1] - lumpsum_amount)/lumpsum_amount
     cgar = (((1+returnRate)**(1/year_diff))-1)
     stats = u'''
