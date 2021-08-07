@@ -119,7 +119,7 @@ _開始日期_為 {}，_結束日期_為 {}\n，一共投資了 {:.2f} 年\n。�
 
 def main():
 
-    row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.beta_columns(
+    row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns(
         (.1, 2, .2, 1, .1))
 
     row0_1.title('定期定額股票查詢系統')
@@ -130,7 +130,7 @@ def main():
     row0_2.subheader(
         'A Simple Stock Analysis App by [Brian L. Chen](https://icheft.github.io) (CHINESE VER.)')
 
-    row1_spacer1, row1_1, row1_spacer2 = st.beta_columns((.1, 3.2, .1))
+    row1_spacer1, row1_1, row1_spacer2 = st.columns((.1, 3.2, .1))
 
     with row1_1:
         st.markdown(
@@ -138,13 +138,13 @@ def main():
         st.markdown(
             "**請按照格式要求輸入值。可以輸入不同於預設的投資標的唷！** 👇🏾")
 
-    row2_spacer1, row2_1, row2_spacer2, row2_2, row2_spacer3 = st.beta_columns(
+    row2_spacer1, row2_1, row2_spacer2, row2_2, row2_spacer3 = st.columns(
         (.1, 1.5, 0.1, 1.5, 0.1))
 
     with row2_1:
         stock_id = st.text_input("輸入你的股票代碼*", '0050.TW')
 
-        need_help = st.beta_expander('需要幫忙嗎？ 👉')
+        need_help = st.expander('需要幫忙嗎？ 👉')
         with need_help:
             st.markdown("""不知道您欲查詢的投資標的？只要搜尋「股票代碼.TW」就可以繼續查詢，如「0050.TW」。完整的台股代碼可以參考[本國上市證券國際證券辨識號碼一覽表](https://isin.twse.com.tw/isin/C_public.jsp?strMode=2)。
 
@@ -154,7 +154,7 @@ def main():
         installment = st.number_input(
             "輸入定期定額金額", value=3000, step=1000, min_value=1000)
 
-    row3_spacer1, row3_1, row3_spacer2, row3_2, row3_spacer3, row3_3, row3_spacer4 = st.beta_columns(
+    row3_spacer1, row3_1, row3_spacer2, row3_2, row3_spacer3, row3_3, row3_spacer4 = st.columns(
         (.1, 1, 0.05, 1, 0.05, 1, 0.1))
 
     with row3_1:
@@ -167,7 +167,7 @@ def main():
         offset_day = int(st.selectbox('每月扣款日',
                                       ('6', '16', '26')))  # multichoice to be added
 
-    line1_spacer1, line1_1, line1_spacer2 = st.beta_columns((.1, 3.2, .1))
+    line1_spacer1, line1_1, line1_spacer2 = st.columns((.1, 3.2, .1))
 
     with line1_1:
         if installment == 0:
@@ -183,7 +183,7 @@ def main():
         investment_dates, (sip_balance, sip_growth, sip_stats, purchased_agg), (lumpsum_balance,
                                                                                 lumpsum_growth, lumpsum_stats) = compare_methods(stock_df, start, end, installment, offset_day)
 
-    line2_spacer1, line2_1, line2_spacer2 = st.beta_columns((.1, 3.2, .1))
+    line2_spacer1, line2_1, line2_spacer2 = st.columns((.1, 3.2, .1))
     with line2_1:
         # if stock_id.lower() != '0050.tw':
         #     compare_flag = st.checkbox("與大盤（0050.TW）比較？")
@@ -192,7 +192,7 @@ def main():
         compare_flag = False
 
     st.write('')
-    row4_space1, row4_1, row4_space2, row4_2, row4_space3 = st.beta_columns(
+    row4_space1, row4_1, row4_space2, row4_2, row4_space3 = st.columns(
         (.1, 1, .1, 1, .1))
 
     with row4_1:
@@ -235,7 +235,7 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
 
     st.write('')
-    row5_space1, row5_1, row5_space3 = st.beta_columns(
+    row5_space1, row5_1, row5_space3 = st.columns(
         (.1, 2.1, .1))
 
     with row5_1:
@@ -269,7 +269,7 @@ def main():
             st.plotly_chart(fig, use_container_width=True)
             st.markdown(stats[1])
 
-    row6_spacer1, row6_1, row6_spacer2 = st.beta_columns((.1, 3.2, .1))
+    row6_spacer1, row6_1, row6_spacer2 = st.columns((.1, 3.2, .1))
     with row6_1:
         st.markdown('***')
         st.markdown(

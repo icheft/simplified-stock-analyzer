@@ -101,7 +101,7 @@ _開始日期_為 {}，_結束日期_為 {}\n，一共投資了 {:.2f} 年\n。�
 
 def main():
 
-    row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.beta_columns(
+    row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns(
         (.1, 2, .2, 1, .1))
 
     row0_1.title('股票查詢系統')
@@ -112,7 +112,7 @@ def main():
     row0_2.subheader(
         'A Simple Stock Analysis App by [Brian L. Chen](https://icheft.github.io) (CHINESE VER.)')
 
-    row1_spacer1, row1_1, row1_spacer2 = st.beta_columns((.1, 3.2, .1))
+    row1_spacer1, row1_1, row1_spacer2 = st.columns((.1, 3.2, .1))
 
     with row1_1:
         st.markdown(
@@ -120,13 +120,13 @@ def main():
         st.markdown(
             "**請按照格式要求輸入值。可以輸入不同於預設的投資標的唷！** 👇🏾")
 
-    row2_spacer1, row2_1, row2_spacer2, row2_2, row2_spacer3 = st.beta_columns(
+    row2_spacer1, row2_1, row2_spacer2, row2_2, row2_spacer3 = st.columns(
         (.1, 1.5, 0.1, 1.5, 0.1))
 
     with row2_1:
         stock_id = st.text_input("輸入你的股票代碼*", '0050.TW')
 
-        need_help = st.beta_expander('需要幫忙嗎？ 👉')
+        need_help = st.expander('需要幫忙嗎？ 👉')
         with need_help:
             st.markdown("""不知道您欲查詢的投資標的？只要搜尋「股票代碼.TW」就可以繼續查詢，如「0050.TW」。完整的台股代碼可以參考[本國上市證券國際證券辨識號碼一覽表](https://isin.twse.com.tw/isin/C_public.jsp?strMode=2)。
 
@@ -135,7 +135,7 @@ def main():
     with row2_2:
         capital = st.number_input("輸入本金", value=10000)
 
-    row3_spacer1, row3_1, row3_spacer2, row3_2, row3_spacer3 = st.beta_columns(
+    row3_spacer1, row3_1, row3_spacer2, row3_2, row3_spacer3 = st.columns(
         (.1, 1.5, 0.1, 1.5, 0.1))
 
     with row3_1:
@@ -144,7 +144,7 @@ def main():
     with row3_2:
         end_date = st.date_input("結束日期", datetime.date.today())
 
-    line1_spacer1, line1_1, line1_spacer2 = st.beta_columns((.1, 3.2, .1))
+    line1_spacer1, line1_1, line1_spacer2 = st.columns((.1, 3.2, .1))
 
     with line1_1:
         if capital == 0:
@@ -155,7 +155,7 @@ def main():
         stock_name = target.info['longName']
         st.header(f'分析 **{stock_name}**')
 
-    line2_spacer1, line2_1, line2_spacer2 = st.beta_columns((.1, 3.2, .1))
+    line2_spacer1, line2_1, line2_spacer2 = st.columns((.1, 3.2, .1))
     with line2_1:
         if stock_id.lower() != '0050.tw':
             compare_flag = st.checkbox("與大盤（0050.TW）比較？")
@@ -163,7 +163,7 @@ def main():
             compare_flag = False
 
     st.write('')
-    row4_space1, row4_1, row4_space2, row4_2, row4_space3 = st.beta_columns(
+    row4_space1, row4_1, row4_space2, row4_2, row4_space3 = st.columns(
         (.1, 1, .1, 1, .1))
 
     stock_df, growth, stats = stock_analyzer(
@@ -209,7 +209,7 @@ def main():
         st.plotly_chart(fig, use_container_width=True)
 
     st.write('')
-    row5_space1, row5_1, row5_space3 = st.beta_columns(
+    row5_space1, row5_1, row5_space3 = st.columns(
         (.1, 2.1, .1))
 
     with row5_1:
@@ -235,7 +235,7 @@ def main():
             st.plotly_chart(fig, use_container_width=True)
             st.markdown(stats[1])
 
-    row6_spacer1, row6_1, row6_spacer2 = st.beta_columns((.1, 3.2, .1))
+    row6_spacer1, row6_1, row6_spacer2 = st.columns((.1, 3.2, .1))
     with row6_1:
         st.markdown('***')
         st.markdown(
