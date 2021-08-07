@@ -26,7 +26,7 @@
 
 ## 開發
 
-請見[簡易股票工具 - 本地開發](docs/development.md)文件。
+請見[簡易股票工具 - 本地開發](https://github.com/icheft/simplified-stock-analyzer/blob/main/docs/development.md)文件。
 
 ---
 
